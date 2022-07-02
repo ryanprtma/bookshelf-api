@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 const { nanoid } = require('nanoid');
 const books = require('./books');
 
@@ -69,4 +70,20 @@ const addBookHandler = (request, h) => {
   return response;
 };
 
-module.exports = { addBookHandler };
+const getAllBooksHandler = () => {
+  const newBooks = books.map((item) => {
+    const { id, name, publisher } = item;
+    return { id, name, publisher };
+  });
+
+  const response = {
+    status: 'success',
+    data: {
+      books: newBooks,
+    },
+  };
+
+  return response;
+};
+
+module.exports = { addBookHandler, getAllBooksHandler };
